@@ -1,0 +1,84 @@
+flowchart TB
+    subgraph Actors["Actors"]
+        Patient["Patient"]
+        Doctor["Doctor"]
+        Pharmacist["Pharmacist"]
+        LabStaff["Lab Staff"]
+        Admin["Admin"]
+    end
+
+    subgraph Clients["Clients"]
+        Mobile["Mobile App"]
+        Dashboard["Dashboard"]
+    end
+
+    subgraph API["LifeCare API"]
+        Auth["Auth Service"]
+        Users["Users Service"]
+        Consultations["Consultations Service"]
+        Prescriptions["Prescriptions Service"]
+        LabTests["Lab Tests Service"]
+        Medicines["Medicines Service"]
+        Pharmacies["Pharmacies Service"]
+        Hospitals["Hospitals Service"]
+        Insurance["Insurance Providers"]
+        Notifications["Notifications"]
+    end
+
+    subgraph Data["Data Layer"]
+        DB[(PostgreSQL)]
+    end
+
+    Patient --> Mobile
+    Doctor --> Dashboard
+    Pharmacist --> Dashboard
+    LabStaff --> Dashboard
+    Admin --> Dashboard
+    Patient --> Dashboard
+
+    Mobile --> Auth
+    Mobile --> Consultations
+    Mobile --> Prescriptions
+    Mobile --> LabTests
+    Mobile --> Users
+    Dashboard --> Auth
+    Dashboard --> Consultations
+    Dashboard --> Prescriptions
+    Dashboard --> LabTests
+    Dashboard --> Medicines
+    Dashboard --> Pharmacies
+    Dashboard --> Hospitals
+    Dashboard --> Insurance
+    Dashboard --> Users
+
+    Auth --> DB
+    Users --> DB
+    Consultations --> DB
+    Prescriptions --> DB
+    LabTests --> DB
+    Medicines --> DB
+    Pharmacies --> DB
+    Hospitals --> DB
+    Insurance --> DB
+    Notifications --> DB
+
+    subgraph ConsultationFlow["Consultation Flow"]
+        direction LR
+        C1[Book] --> C2[Schedule]
+        C2 --> C3[In Progress]
+        C3 --> C4[Complete]
+        C4 --> C5[Prescriptions / Lab Tests]
+    end
+
+    subgraph PrescriptionFlow["Prescription Flow"]
+        direction LR
+        P1[Doctor Creates] --> P2[Pending]
+        P2 --> P3[Pharmacist Dispenses]
+        P3 --> P4[Dispensed]
+    end
+
+    subgraph LabTestFlow["Lab Test Flow"]
+        direction LR
+        L1[Doctor Recommends] --> L2[Lab Staff Completes]
+        L2 --> L3[Results Saved]
+    end
