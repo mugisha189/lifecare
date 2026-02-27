@@ -1,0 +1,45 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.expo
+.expo-shared
+
+# iOS
+ios/Pods
+ios/build
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace
+xcuserdata
+
+# Android
+android/.gradle
+android/app/build
+android/build
+*.jks
+*.keystore
+
+# Generated files
+*.generated.*
+.expo-shared
+.expo
+expo-env.d.ts
+
+# Cache
+.cache
+*.log
+.DS_Store
+
+# Old codebase reference
+old/
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

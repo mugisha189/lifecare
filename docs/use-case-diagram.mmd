@@ -1,0 +1,87 @@
+%% LifeCare Use Case Diagram (Mermaid)
+%% Actors interact with use cases inside the system boundary.
+flowchart LR
+    subgraph Actors["Actors"]
+        Patient["Patient"]
+        Doctor["Doctor"]
+        Pharmacist["Pharmacist"]
+        LabStaff["Lab Staff"]
+        Admin["Admin"]
+    end
+
+    subgraph System["LifeCare System"]
+        direction TB
+        subgraph PatientUC["Patient use cases"]
+            UC_Register["Register / Login"]
+            UC_BookConsult["Book consultation"]
+            UC_ViewConsult["View consultations"]
+            UC_ViewPresc["View prescriptions"]
+            UC_ViewLabResults["View lab test results"]
+            UC_AddReminder["Add medication reminder"]
+            UC_UpdateProfile["Update profile"]
+            UC_Emergency["Request emergency"]
+        end
+        subgraph DoctorUC["Doctor use cases"]
+            UC_DoctorLogin["Login"]
+            UC_ViewMyConsult["View my consultations"]
+            UC_CreatePresc["Create prescription"]
+            UC_RecommendLab["Recommend lab test"]
+            UC_ConsultNotes["Add consultation notes"]
+            UC_ConsultStatus["Update consultation status"]
+            UC_PatientHistory["View patient history"]
+        end
+        subgraph PharmacistUC["Pharmacist use cases"]
+            UC_PharmLogin["Login"]
+            UC_RecordPresc["Record prescription by code"]
+            UC_Dispense["Dispense / Mark as dispensed"]
+            UC_Inventory["Manage pharmacy inventory"]
+        end
+        subgraph LabStaffUC["Lab staff use cases"]
+            UC_LabLogin["Login"]
+            UC_ViewLabTests["View lab tests"]
+            UC_CompleteLab["Complete lab test results"]
+        end
+        subgraph AdminUC["Admin use cases"]
+            UC_ManageUsers["Manage users"]
+            UC_ManageHospitals["Manage hospitals / pharmacies"]
+            UC_ManageAssign["Assign staff to hospital / pharmacy"]
+            UC_ManageMeds["Manage medicines"]
+            UC_ManageInsurance["Manage insurance providers"]
+            UC_ManageLabTypes["Manage lab test types"]
+            UC_ViewAll["View all consultations / prescriptions / lab tests"]
+        end
+    end
+
+    Patient --> UC_Register
+    Patient --> UC_BookConsult
+    Patient --> UC_ViewConsult
+    Patient --> UC_ViewPresc
+    Patient --> UC_ViewLabResults
+    Patient --> UC_AddReminder
+    Patient --> UC_UpdateProfile
+    Patient --> UC_Emergency
+
+    Doctor --> UC_DoctorLogin
+    Doctor --> UC_ViewMyConsult
+    Doctor --> UC_CreatePresc
+    Doctor --> UC_RecommendLab
+    Doctor --> UC_ConsultNotes
+    Doctor --> UC_ConsultStatus
+    Doctor --> UC_PatientHistory
+
+    Pharmacist --> UC_PharmLogin
+    Pharmacist --> UC_RecordPresc
+    Pharmacist --> UC_Dispense
+    Pharmacist --> UC_Inventory
+
+    LabStaff --> UC_LabLogin
+    LabStaff --> UC_ViewLabTests
+    LabStaff --> UC_CompleteLab
+
+    Admin --> UC_ManageUsers
+    Admin --> UC_ManageHospitals
+    Admin --> UC_ManageAssign
+    Admin --> UC_ManageMeds
+    Admin --> UC_ManageInsurance
+    Admin --> UC_ManageLabTypes
+    Admin --> UC_ViewAll

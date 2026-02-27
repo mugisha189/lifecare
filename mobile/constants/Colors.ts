@@ -1,0 +1,90 @@
+/**
+ * LifeCare Color Palette
+ * Primary brand color: #062F71 (Deep Blue)
+ */
+
+const tintColorLight = '#062F71';
+const tintColorDark = '#fff';
+
+export const Colors = {
+  light: {
+    text: '#11181C',
+    background: '#fff',
+    tint: tintColorLight,
+    faded: '#A0A0A0',
+    faded2: '#E9EFEE',
+    icon: '#687076',
+    tabIconDefault: '#687076',
+    tabIconSelected: tintColorLight,
+    others: {
+      green50: '#e8f5e9',
+      green100: '#c8e6c9',
+      green200: '#a5d6a7',
+      green300: '#81c784',
+      green400: '#66bb6a',
+      green500: '#4caf50',
+      green600: '#43a047',
+      green700: '#388e3c',
+      green800: '#2e7d32',
+      green900: '#1b5e20',
+      greenA100: '#b9f6ca',
+      greenA200: '#69f0ae',
+      greenA400: '#00e676',
+      greenA700: '#00c853',
+      red50: '#ffebee',
+      red100: '#ffcdd2',
+      red200: '#ef9a9a',
+      red300: '#e57373',
+      red400: '#ef5350',
+      red500: '#f44336',
+      red600: '#e53935',
+      red700: '#d32f2f',
+      red800: '#c62828',
+      red900: '#b71c1c',
+      redA100: '#ff8a80',
+      redA200: '#ff5252',
+      redA400: '#ff1744',
+      redA700: '#d50000',
+      yellow50: '#fffde7',
+      yellow100: '#fff9c4',
+      yellow200: '#fff59d',
+      yellow300: '#fff176',
+      yellow400: '#ffee58',
+      yellow500: '#ffeb3b',
+      yellow600: '#fdd835',
+      yellow700: '#fbc02d',
+      yellow800: '#f9a825',
+      yellow900: '#f57f17',
+      yellowA100: '#ffff8d',
+      yellowA200: '#ffff00',
+      yellowA400: '#ffea00',
+      yellowA700: '#ffd600',
+    },
+    CONTROLLED: {
+      '50': '#eaf8ff',
+      '100': '#d1f0ff',
+      '200': '#ade6ff',
+      '300': '#74d8ff',
+      '400': '#34bfff',
+      '500': '#059bff',
+      '600': '#0075ff',
+      '700': '#005bff',
+      '800': '#004bd9',
+      '900': '#0045a9',
+      '950': '#062f71',
+    },
+  },
+  dark: {
+    text: '#11181C',
+    background: '#fff',
+    tint: tintColorLight,
+    faded: '#A0A0A0',
+    faded2: '#E9EFEE',
+    icon: '#687076',
+    tabIconDefault: '#687076',
+    tabIconSelected: tintColorLight,
+  },
+};
+
+// Default export for backward compatibility
+export default Colors;

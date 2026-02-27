@@ -1,0 +1,242 @@
+erDiagram
+    Role ||--o{ User : "has"
+    User ||--o| DoctorProfile : "has"
+    User ||--o| PatientProfile : "has"
+    User ||--o| PharmacistProfile : "has"
+    User ||--o| LabStaffProfile : "has"
+    User ||--o{ Consultation : "patient"
+    User ||--o{ Prescription : "patient"
+    User ||--o{ LabTest : "patient"
+    User ||--o{ ConsultationNote : "author"
+    User ||--o{ Review : "author"
+    User ||--o{ RefreshToken : "has"
+    User ||--o{ VerificationToken : "has"
+    User ||--o{ UserActivity : "has"
+    User ||--o{ Issue : "reports"
+
+    Hospital ||--o{ DoctorProfile : "employs"
+    Hospital ||--o{ PharmacistProfile : "employs"
+    Hospital ||--o{ LabStaffProfile : "employs"
+    Hospital ||--o{ EmergencyRequest : "receives"
+
+    Pharmacy ||--o{ PharmacistProfile : "employs"
+    Pharmacy ||--o{ PharmacyMedicine : "has"
+
+    InsuranceProvider ||--o{ PatientProfile : "covers"
+
+    DoctorProfile ||--o{ Consultation : "doctor"
+    DoctorProfile ||--o{ Prescription : "prescribes"
+    DoctorProfile ||--o{ LabTest : "requests"
+    DoctorProfile ||--o{ Review : "receives"
+    DoctorProfile ||--o{ DoctorDocument : "has"
+
+    Consultation ||--o{ ConsultationNote : "has"
+    Consultation ||--o{ Prescription : "has"
+    Consultation ||--o{ LabTest : "has"
+    Consultation ||--o{ Review : "has"
+
+    Prescription ||--o{ PrescriptionMedicine : "contains"
+    PharmacistProfile ||--o{ Prescription : "dispenses"
+
+    Medicine ||--o{ PrescriptionMedicine : "in"
+    Medicine ||--o{ PharmacyMedicine : "in"
+
+    LabTestType ||--o{ LabTestTypeQuestion : "has"
+    LabTestType ||--o{ LabTest : "type"
+
+    LabStaffProfile ||--o{ LabTest : "performs"
+
+    Notification ||--o{ NotificationRecipient : "has"
+    User ||--o{ NotificationRecipient : "receives"
+
+    Role {
+        uuid id PK
+        string name
+        string description
+    }
+
+    User {
+        uuid id PK
+        uuid roleId FK
+        string name
+        string email UK
+        string phoneNumber UK
+        string passwordHash
+        enum gender
+        enum verificationStatus
+        boolean active
+    }
+
+    DoctorProfile {
+        uuid id PK
+        uuid userId FK
+        uuid hospitalId FK
+        string licenseNumber UK
+        string specialization
+        enum doctorStatus
+    }
+
+    PatientProfile {
+        uuid id PK
+        uuid userId FK
+        uuid insuranceProviderId FK
+        date dateOfBirth
+        string insuranceNumber
+    }
+
+    PharmacistProfile {
+        uuid id PK
+        uuid userId FK
+        uuid hospitalId FK
+        uuid pharmacyId FK
+        string licenseNumber UK
+        enum pharmacistStatus
+    }
+
+    LabStaffProfile {
+        uuid id PK
+        uuid userId FK
+        uuid hospitalId FK
+        string licenseNumber
+        enum labStaffStatus
+    }
+
+    Hospital {
+        uuid id PK
+        string name
+        string address
+        string city
+        boolean active
+    }
+
+    Pharmacy {
+        uuid id PK
+        string name
+        string address
+        string city
+        boolean active
+    }
+
+    InsuranceProvider {
+        uuid id PK
+        string name UK
+        float patientDividendPercent
+        float insuranceDividendPercent
+    }
+
+    Consultation {
+        uuid id PK
+        string code UK
+        uuid doctorId FK
+        uuid patientId FK
+        datetime date
+        int duration
+        enum status
+    }
+
+    ConsultationNote {
+        uuid id PK
+        uuid consultationId FK
+        uuid userId FK
+        text content
+        json attachments
+    }
+
+    Prescription {
+        uuid id PK
+        uuid consultationId FK
+        uuid doctorId FK
+        uuid patientId FK
+        uuid pharmacistId FK
+        enum status
+        datetime dispensedAt
+    }
+
+    PrescriptionMedicine {
+        uuid id PK
+        uuid prescriptionId FK
+        uuid medicineId FK
+        string dosage
+        string frequency
+        string duration
+        int quantity
+    }
+
+    Medicine {
+        uuid id PK
+        string name
+        text description
+        boolean active
+    }
+
+    PharmacyMedicine {
+        uuid id PK
+        uuid pharmacyId FK
+        uuid medicineId FK
+        date inventoryDate
+        int quantity
+    }
+
+    LabTestType {
+        uuid id PK
+        string name
+        text description
+    }
+
+    LabTestTypeQuestion {
+        uuid id PK
+        uuid labTestTypeId FK
+        string label
+        enum type
+        json options
+    }
+
+    LabTest {
+        uuid id PK
+        uuid consultationId FK
+        uuid patientId FK
+        uuid doctorId FK
+        uuid labStaffId FK
+        uuid labTestTypeId FK
+        string testName
+        enum status
+        json results
+    }
+
+    EmergencyRequest {
+        uuid id PK
+        uuid patientId FK
+        uuid hospitalId FK
+        json location
+        enum status
+    }
+
+    Review {
+        uuid id PK
+        uuid userId FK
+        uuid consultationId FK
+        uuid doctorProfileId FK
+        int rating
+        text comment
+    }
+
+    RefreshToken {
+        uuid id PK
+        uuid userId FK
+        string token UK
+        datetime expiresAt
+    }
+
+    Notification {
+        uuid id PK
+        string title
+        text content
+        datetime sentAt
+    }
+
+    NotificationRecipient {
+        uuid id PK
+        uuid notificationId FK
+        uuid userId FK
+        boolean isRead
+    }
